@@ -76,6 +76,7 @@ export default function App() {
   // Telegram Configuration State
   const [botToken, setBotToken] = useState('');
   const [channelId, setChannelId] = useState('');
+  const [siteUrl, setSiteUrl] = useState('');
   const [autoBroadcast, setAutoBroadcast] = useState(true);
   const [showToken, setShowToken] = useState(false);
   const [botMeta, setBotMeta] = useState<{ id: number; username: string; first_name: string } | null>(null);
@@ -202,6 +203,7 @@ export default function App() {
       if (data.success && data.telegram) {
         setBotToken(data.telegram.botToken || '');
         setChannelId(data.telegram.channelId || '');
+        setSiteUrl(data.telegram.siteUrl || '');
         setAutoBroadcast(Boolean(data.telegram.autoPush ?? data.telegram.autoBroadcast));
         setRawConfig(data.telegram);
         if (data.telegram.botUsername) {
@@ -272,6 +274,7 @@ export default function App() {
         body: JSON.stringify({
           botToken: botToken.trim(),
           channelId: channelId.trim(),
+          siteUrl: siteUrl.trim(),
           autoPush: autoBroadcast,
           autoBroadcast
         }),
@@ -861,6 +864,24 @@ export default function App() {
                       />
                     </div>
 
+                    {/* Public Site URL for Instant View */}
+                    <div>
+                      <div className="sys-label">
+                        <span>Public Site URL (for Telegram Instant View buttons)</span>
+                        <span style={{ fontSize: '11px', color: '#38bdf8' }} className="font-mono">e.g. http://localhost:3000 or https://nexusnews.com</span>
+                      </div>
+                      <input
+                        type="text"
+                        className="sys-input font-mono"
+                        value={siteUrl}
+                        onChange={(e) => setSiteUrl(e.target.value)}
+                        placeholder="https://nexusnews.com or http://localhost:3000"
+                      />
+                      <div style={{ fontSize: '11px', color: 'var(--sys-text-muted)', marginTop: '4px' }}>
+                        Telegram broadcasts generate <strong>⚡ Instant View</strong> buttons linking directly to <code>{siteUrl || 'http://localhost:3000'}/read?url=...</code>
+                      </div>
+                    </div>
+
                     {/* Auto-Broadcast Toggle */}
                     <div style={{
                       display: 'flex',
@@ -963,6 +984,51 @@ export default function App() {
                           {lastDispatchResult}
                         </span>
                       )}
+                    </div>
+
+                    {/* Live Instant View Button Preview */}
+                    <div style={{
+                      marginTop: '6px',
+                      padding: '12px',
+                      background: '#090d16',
+                      border: '1px solid var(--sys-border)',
+                      borderRadius: '6px',
+                      fontSize: '11px',
+                    }}>
+                      <div style={{ fontWeight: 600, color: '#94a3b8', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span>⚡ Telegram Post Buttons Preview:</span>
+                      </div>
+                      <div style={{ display: 'flex', gap: '8px', maxWidth: '360px' }}>
+                        <div style={{
+                          flex: 1,
+                          padding: '7px 10px',
+                          background: 'rgba(56, 189, 248, 0.15)',
+                          border: '1px solid rgba(56, 189, 248, 0.3)',
+                          borderRadius: '4px',
+                          color: '#38bdf8',
+                          textAlign: 'center',
+                          fontWeight: 600,
+                          fontSize: '11px',
+                        }}>
+                          ⚡ Instant View
+                        </div>
+                        <div style={{
+                          flex: 1,
+                          padding: '7px 10px',
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          border: '1px solid var(--sys-border)',
+                          borderRadius: '4px',
+                          color: '#f1f5f9',
+                          textAlign: 'center',
+                          fontWeight: 600,
+                          fontSize: '11px',
+                        }}>
+                          🌐 Source
+                        </div>
+                      </div>
+                      <div style={{ color: 'var(--sys-text-muted)', fontSize: '10px', marginTop: '6px' }}>
+                        Target: <code>{(siteUrl || 'http://localhost:3000').replace(/\/$/, '')}/read?url=...</code>
+                      </div>
                     </div>
                   </div>
                 </div>

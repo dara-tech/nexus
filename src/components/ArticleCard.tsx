@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { NewsArticle } from '@/lib/types';
-import { ExternalLink, BookOpen, Bookmark, Clock } from 'lucide-react';
+import { ExternalLink, Bookmark, Clock, Zap } from 'lucide-react';
+import Link from 'next/link';
 
 interface ArticleCardProps {
   article: NewsArticle;
@@ -121,17 +122,15 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           className="article-footer-bar"
           onClick={(e) => e.stopPropagation()}
         >
-          <button
+          <Link
             id={`read-btn-${article.id}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              onReadFull(article);
-            }}
+            href={`/read?url=${encodeURIComponent(article.link)}&title=${encodeURIComponent(article.title)}&source=${encodeURIComponent(article.sourceName || '')}`}
             className="btn-read-article"
+            title="Read in Instant View"
           >
-            <BookOpen size={13} />
-            <span>Read full</span>
-          </button>
+            <Zap size={13} fill="currentColor" />
+            <span>Instant View</span>
+          </Link>
 
           <div className="article-actions-group">
             <button

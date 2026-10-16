@@ -6,6 +6,7 @@ export interface TelegramSettings {
   botToken: string;
   channelId: string;
   autoPush: boolean;
+  siteUrl?: string;
   template?: string;
   updatedAt?: Date;
 }
@@ -50,6 +51,7 @@ export async function getTelegramSettings(): Promise<TelegramSettings> {
         botToken: settings.botToken || DEFAULT_TELEGRAM_TOKEN,
         channelId: settings.channelId || DEFAULT_CHANNEL_ID,
         autoPush: Boolean(settings.autoPush),
+        siteUrl: settings.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || '',
         template: settings.template || '',
         updatedAt: settings.updatedAt,
       };
@@ -60,6 +62,7 @@ export async function getTelegramSettings(): Promise<TelegramSettings> {
       botToken: DEFAULT_TELEGRAM_TOKEN,
       channelId: DEFAULT_CHANNEL_ID,
       autoPush: false,
+      siteUrl: process.env.NEXT_PUBLIC_SITE_URL || '',
       template: '<b>📢 [{source}]</b>\n\n<b>{title}</b>\n\n{snippet}\n\n🔗 {link}',
       updatedAt: new Date(),
     };
@@ -71,6 +74,7 @@ export async function getTelegramSettings(): Promise<TelegramSettings> {
       botToken: DEFAULT_TELEGRAM_TOKEN,
       channelId: DEFAULT_CHANNEL_ID,
       autoPush: false,
+      siteUrl: process.env.NEXT_PUBLIC_SITE_URL || '',
     };
   }
 }

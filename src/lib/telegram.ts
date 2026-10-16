@@ -56,15 +56,28 @@ export async function pushArticleToTelegram(
     ? escapeTelegramHtml(article.snippet.slice(0, 450))
     : '';
 
+  const siteBase = (
+    settings.siteUrl?.trim() ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.SITE_URL ||
+    'http://localhost:3000'
+  ).replace(/\/$/, '');
+
+  const instantViewUrl = `${siteBase}/read?url=${encodeURIComponent(article.link)}&title=${encodeURIComponent(article.title || '')}&source=${encodeURIComponent(article.sourceName || '')}`;
+
   const captionHtml = `<b>📢 [${cleanSource}]</b>\n\n<b>${cleanTitle}</b>\n\n${
     cleanSnippet ? `${cleanSnippet}\n\n` : ''
-  }🔗 <a href="${article.link}">Read Full Article</a>\n📡 <i>Nexus Wire Syndication</i>`;
+  }⚡ <a href="${instantViewUrl}">Instant View</a> • 🔗 <a href="${article.link}">Original Source</a>\n📡 <i>Nexus Wire Syndication</i>`;
 
   const inlineKeyboard = {
     inline_keyboard: [
       [
         {
-          text: '📖 Read Full Story',
+          text: '⚡ Instant View',
+          url: instantViewUrl,
+        },
+        {
+          text: '🌐 Source',
           url: article.link,
         },
       ],

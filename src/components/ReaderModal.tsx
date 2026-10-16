@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { ScrapedFullArticle } from '@/lib/types';
-import { X, ExternalLink, Clock, User, Globe, AlertCircle } from 'lucide-react';
+import { X, ExternalLink, Clock, User, Globe, AlertCircle, Zap } from 'lucide-react';
+import Link from 'next/link';
 import { ReaderSkeleton } from './ReaderSkeleton';
 
 interface ReaderModalProps {
@@ -78,6 +79,17 @@ export const ReaderModal: React.FC<ReaderModalProps> = ({
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Link
+              id="reader-view-fullscreen-link"
+              href={`/read?url=${encodeURIComponent(url)}&title=${encodeURIComponent(data?.title || initialTitle || '')}&source=${encodeURIComponent(data?.domain || '')}`}
+              className="btn-outline"
+              style={{ height: '30px', fontSize: '0.78rem', color: '#0284c7', borderColor: 'rgba(2, 132, 199, 0.4)' }}
+              title="Open full page Instant View reader"
+            >
+              <Zap size={13} fill="currentColor" />
+              <span>Instant View Page</span>
+            </Link>
+
             <a
               id="reader-view-original-link"
               href={url}
