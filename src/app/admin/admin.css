@@ -1,0 +1,326 @@
+:root {
+  --sys-bg: #090d16;
+  --sys-surface: #0e1422;
+  --sys-panel: #111827;
+  --sys-panel-header: #141b2d;
+  --sys-border: #1e293b;
+  --sys-border-bright: #334155;
+  --sys-text: #f1f5f9;
+  --sys-text-muted: #94a3b8;
+  --sys-text-dim: #64748b;
+  
+  --sys-green: #10b981;
+  --sys-cyan: #0ea5e9;
+  --sys-amber: #f59e0b;
+  --sys-red: #ef4444;
+
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+.admin-wrapper {
+  background-color: var(--sys-bg);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 28px 28px;
+  color: var(--sys-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Monospace utility */
+.font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Control Panel Container */
+.ctrl-panel {
+  background: var(--sys-surface);
+  border: 1px solid var(--sys-border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.ctrl-panel-header {
+  background: var(--sys-panel-header);
+  border-bottom: 1px solid var(--sys-border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.ctrl-panel-body {
+  padding: 16px;
+}
+
+/* Status Indicator Badge */
+.sys-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid transparent;
+}
+
+.sys-badge-green {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.sys-badge-cyan {
+  background: rgba(14, 165, 233, 0.12);
+  color: #38bdf8;
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+.sys-badge-amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.sys-badge-red {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Status Lamp LED */
+.status-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.led-green {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.led-amber {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.led-red {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+.led-pulse {
+  animation: ledPulse 2s infinite ease-in-out;
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.92); }
+}
+
+/* System Form Inputs */
+.sys-input {
+  background: #080c14;
+  border: 1px solid var(--sys-border);
+  border-radius: 5px;
+  color: #f1f5f9;
+  font-size: 13px;
+  padding: 8px 12px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.sys-input:focus {
+  border-color: var(--sys-cyan);
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+}
+
+.sys-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+/* System Buttons */
+.sys-btn {
+  background: #141c2c;
+  color: #cbd5e1;
+  border: 1px solid var(--sys-border-bright);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sys-btn:hover {
+  background: #1e293b;
+  border-color: #475569;
+  color: #ffffff;
+}
+
+.sys-btn:active {
+  transform: translateY(1px);
+}
+
+.sys-btn-primary {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+}
+
+.sys-btn-primary:hover {
+  background: #0369a1;
+  border-color: #7dd3fc;
+}
+
+.sys-btn-danger {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+.sys-btn-danger:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+}
+
+/* System Sidebar Navigation Item */
+.sys-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--sys-text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+}
+
+.sys-nav-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #f1f5f9;
+}
+
+.sys-nav-item.active {
+  background: #111a2d;
+  color: #38bdf8;
+  font-weight: 600;
+  border-left-color: var(--sys-cyan);
+}
+
+/* Data Table */
+.sys-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.sys-table th {
+  background: #0c111d;
+  color: var(--sys-text-muted);
+  text-align: left;
+  padding: 9px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--sys-border);
+}
+
+.sys-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #141c2b;
+  color: #cbd5e1;
+}
+
+.sys-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Switch Toggle */
+.sys-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+
+.sys-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.sys-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #1e293b;
+  border: 1px solid var(--sys-border-bright);
+  transition: 0.2s;
+  border-radius: 20px;
+}
+
+.sys-slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #94a3b8;
+  transition: 0.2s;
+  border-radius: 50%;
+}
+
+input:checked + .sys-slider {
+  background-color: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+}
+
+input:checked + .sys-slider:before {
+  transform: translateX(16px);
+  background-color: #10b981;
+}
+
+/* Animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Search, Moon, Sun, Bookmark, X, Settings } from 'lucide-react';
 import { NexusLogo } from './NexusLogo';
 
@@ -112,12 +113,10 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {/* Admin Control Dashboard link */}
-            <a
-              href="http://localhost:5173"
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/admin"
               className="btn-icon"
-              title="Open Admin Control Center (Vite + MongoDB)"
+              title="Open Admin Control Center"
               aria-label="Admin Control"
               style={{
                 display: 'inline-flex',
@@ -129,7 +128,7 @@ export const Header: React.FC<HeaderProps> = ({
               }}
             >
               <Settings size={16} />
-            </a>
+            </Link>
           </div>
         </div>
 
